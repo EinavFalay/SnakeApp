@@ -24,6 +24,11 @@ function startGame() {
 }
 
 function move() {
+    const tail = currentSnake.pop();
+    squares[tail].classList.remove('snake');
+    const newHead = currentSnake[0] + direction;
+    currentSnake.unshift(newHead);
+    squares[newHead].classList.add('snake');
     const hitBottom = (currentSnake[0] + 20 >= 400 && direction === 20);
     const hitTop = (currentSnake[0] - 20 < 0 && direction === -20);
     const hitRight = (currentSnake[0] % 20 === 19 && direction === -20);
@@ -45,8 +50,12 @@ function changeDir(newDir) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'arrowUp') changeDir(-20);
-    if (e.key === 'arrowDown') changeDir(20);
-    if (e.key === 'arrowLeft') changeDir(1);
-    if (e.key === 'arrowRight') changeDir(-1);
+    if (e.key === 'ArrowUp') changeDir(-20);
+    if (e.key === 'ArrowDown') changeDir(20);
+    if (e.key === 'ArrowLeft') changeDir(1);
+    if (e.key === 'ArrowRight') changeDir(-1);
 });
+
+startGame();
+generateApple();
+setInterval(move, 200);
