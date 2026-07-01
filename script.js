@@ -55,6 +55,20 @@ function move() {
         scoreDisplay.textContent=score;
         generateApple();
     }
+
+    document.addEventListener('touched', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, false);
+
+    document.addEventListener('touched', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, false);
+
+
 }
 
 function generateApple() {
@@ -79,6 +93,23 @@ document.addEventListener('keydown', (e) => {
 
 function endGame(){
     clearInterval(timerId);
+}
+
+function handleSwipe() {
+    const dx = touchEndX - touchStartX;
+    const dx = touchEndY - touchStartY;
+    const absDx = Math.abs(dx);
+    const absDx = Math.abs(dy);
+
+    if (Math.max(absDx, absDy) > 30) {
+        if (absDx > absDy) {
+            if (dx > 0) changeDir(-1);
+            else changeDir(1);
+        } else {
+            if (dy > 0) changeDir(20);
+            else changeDir(-20);
+        }
+    }
 }
 
 startGame();
