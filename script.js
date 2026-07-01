@@ -59,7 +59,6 @@ function move() {
     document.addEventListener('touched', e => {
         touchEndX = e.changedTouches[0].screenX;
         touchEndY = e.changedTouches[0].screenY;
-        handleSwipe();
     }, false);
 
     document.addEventListener('touched', e => {
@@ -97,9 +96,9 @@ function endGame(){
 
 function handleSwipe() {
     const dx = touchEndX - touchStartX;
-    const dx = touchEndY - touchStartY;
+    const dy = touchEndY - touchStartY;
     const absDx = Math.abs(dx);
-    const absDx = Math.abs(dy);
+    const absDy = Math.abs(dy);
 
     if (Math.max(absDx, absDy) > 30) {
         if (absDx > absDy) {
@@ -112,5 +111,5 @@ function handleSwipe() {
     }
 }
 
-startGame();
+
 
